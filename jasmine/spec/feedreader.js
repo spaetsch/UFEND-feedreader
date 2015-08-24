@@ -16,16 +16,12 @@ $(function() {
     describe('RSS Feeds', function() {
         /* This is our first test - it tests to make sure that the
          * allFeeds variable has been defined and that it is not
-         * empty. Experiment with this before you get started on
-         * the rest of this project. What happens when you change
-         * allFeeds in app.js to be an empty array and refresh the
-         * page?
+         * empty.
          */
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
-
 
         /* This test loops through each feed
          * in the allFeeds object and ensures it has a URL defined
@@ -38,7 +34,7 @@ $(function() {
           }
         });
 
-        /* TODO: Write a test that loops through each feed
+        /* test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
@@ -51,7 +47,6 @@ $(function() {
     });
 
     describe('The menu', function() {
-
         /* test that ensures the menu element is
          * hidden by default.
          */
@@ -69,7 +64,6 @@ $(function() {
           $('a.menu-icon-link').click();
           expect($("body").attr("class")).toBe("menu-hidden");
         });
-
     });
 
     describe('Initial Entries', function() {
@@ -77,9 +71,7 @@ $(function() {
       * the use of Jasmine's beforeEach and asynchronous done() function.
       */
       beforeEach(function(done) {
-        console.log("beforeEach");
         loadFeed(0, function(){
-          console.log("test loadFeed");
           done();
         });
       });
@@ -91,13 +83,22 @@ $(function() {
         //expect that there is at least one .entry in .feed
         expect($('.feed').children(".entry")).toBeDefined();
       });
+    });
+
+    describe('New Feed Selection', function() {
+      /* Test that checks when a new feed is loaded
+       * by the loadFeed function that the content actually changes.*/
+      var origFeed = $('.feed');
+      var newFeed;
+      beforeEach(function(done) {
+        loadFeed(1, function(){
+          newFeed = $('.feed');
+          done();
+        });
+      });
+      it("loading", function(){
+        expect(origFeed).not.toBe(newFeed);
+      });
 
     });
-    /* TODO: Write a new test suite named "New Feed Selection"
-
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
-
 }());
