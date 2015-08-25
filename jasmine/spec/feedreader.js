@@ -47,8 +47,7 @@ $(function() {
     });
 
     describe('The menu', function() {
-        /* test that ensures the menu element is
-         * hidden by default.
+        /* test that ensures the menu element is hidden by default.
          */
         it('hidden by default', function() {
             expect($("body").attr("class")).toBe("menu-hidden");
@@ -68,9 +67,9 @@ $(function() {
 
     describe('Initial Entries', function() {
         /* loadFeed() is asynchronous so this test wil require
-        * the use of Jasmine's beforeEach and asynchronous done() function.
-        */
-        beforeEach(function(done) {
+         * the use of Jasmine's beforeEach and asynchronous done() function.
+         */
+        beforeEach(function(done){
             loadFeed(0, function(){
                 done();
             });
@@ -79,25 +78,29 @@ $(function() {
         /* Check that when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.*/
-        it("loading", function(){
+        it("loading at least single entry", function(){
             //expect that there is at least one .entry in .feed
-            expect($('.feed').children(".entry")).toBeDefined();
+            expect($(".feed .entry").length).not.toBe(0);
         });
     });
 
     describe('New Feed Selection', function() {
         /* Test that checks when a new feed is loaded
          * by the loadFeed function that the content actually changes.*/
-        var origFeed = $('.feed');
-        var newFeed;
+        var firstFeedEntry;
+        var nextFeedEntry;
+
         beforeEach(function(done) {
-            loadFeed(1, function(){
-                newFeed = $('.feed');
-                done();
+            loadFeed(0, function(){
+                firstFeedEntry = $(".feed .entry").html();
+                loadFeed(1, function(){
+                    nextFeedEntry = $(".feed .entry").html();
+                    done();
+                });
             });
         });
-        it("loading", function(){
-            expect(origFeed).not.toBe(newFeed);
+        it("loading different feed", function(){
+            expect(firstFeedEntry).not.toBe(nextFeedEntry);
         });
     });
 }());
