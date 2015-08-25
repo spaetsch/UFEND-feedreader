@@ -28,10 +28,10 @@ $(function() {
          * and that the URL is not empty.
          */
         it('each has URL', function() {
-          for (i=0; i < allFeeds.length; i++){
-            expect(allFeeds[i].url).toBeDefined();
-            expect(allFeeds[i].url.length).not.toBe(0);
-          }
+            for (i=0; i < allFeeds.length; i++){
+                expect(allFeeds[i].url).toBeDefined();
+                expect(allFeeds[i].url.length).not.toBe(0);
+            }
         });
 
         /* test that loops through each feed
@@ -39,10 +39,10 @@ $(function() {
          * and that the name is not empty.
          */
         it('each has name', function() {
-          for (i=0; i < allFeeds.length; i++){
-            expect(allFeeds[i].name).toBeDefined();
-            expect(allFeeds[i].name.length).not.toBe(0);
-          }
+            for (i=0; i < allFeeds.length; i++){
+                expect(allFeeds[i].name).toBeDefined();
+                expect(allFeeds[i].name.length).not.toBe(0);
+            }
         });
     });
 
@@ -51,54 +51,53 @@ $(function() {
          * hidden by default.
          */
         it('hidden by default', function() {
-          expect($("body").attr("class")).toBe("menu-hidden");
+            expect($("body").attr("class")).toBe("menu-hidden");
         });
 
          /* Test ensures the menu changes
           * visibility when the menu icon is clicked.*/
         it('visible on click', function() {
-          //checks if the menu display when clicked
-          $('a.menu-icon-link').click();
-          expect($("body").attr("class")).not.toBe("menu-hidden");
-          //check if it hide when clicked again
-          $('a.menu-icon-link').click();
-          expect($("body").attr("class")).toBe("menu-hidden");
+            //checks if the menu display when clicked
+            $('a.menu-icon-link').click();
+            expect($("body").attr("class")).not.toBe("menu-hidden");
+            //check if it hide when clicked again
+            $('a.menu-icon-link').click();
+            expect($("body").attr("class")).toBe("menu-hidden");
         });
     });
 
     describe('Initial Entries', function() {
-      /* loadFeed() is asynchronous so this test wil require
-      * the use of Jasmine's beforeEach and asynchronous done() function.
-      */
-      beforeEach(function(done) {
-        loadFeed(0, function(){
-          done();
+        /* loadFeed() is asynchronous so this test wil require
+        * the use of Jasmine's beforeEach and asynchronous done() function.
+        */
+        beforeEach(function(done) {
+            loadFeed(0, function(){
+                done();
+            });
         });
-      });
 
-      /* Check that when the loadFeed
-       * function is called and completes its work, there is at least
-       * a single .entry element within the .feed container.*/
-      it("loading", function(){
-        //expect that there is at least one .entry in .feed
-        expect($('.feed').children(".entry")).toBeDefined();
-      });
+        /* Check that when the loadFeed
+         * function is called and completes its work, there is at least
+         * a single .entry element within the .feed container.*/
+        it("loading", function(){
+            //expect that there is at least one .entry in .feed
+            expect($('.feed').children(".entry")).toBeDefined();
+        });
     });
 
     describe('New Feed Selection', function() {
-      /* Test that checks when a new feed is loaded
-       * by the loadFeed function that the content actually changes.*/
-      var origFeed = $('.feed');
-      var newFeed;
-      beforeEach(function(done) {
-        loadFeed(1, function(){
-          newFeed = $('.feed');
-          done();
+        /* Test that checks when a new feed is loaded
+         * by the loadFeed function that the content actually changes.*/
+        var origFeed = $('.feed');
+        var newFeed;
+        beforeEach(function(done) {
+            loadFeed(1, function(){
+                newFeed = $('.feed');
+                done();
+            });
         });
-      });
-      it("loading", function(){
-        expect(origFeed).not.toBe(newFeed);
-      });
-
+        it("loading", function(){
+            expect(origFeed).not.toBe(newFeed);
+        });
     });
 }());
