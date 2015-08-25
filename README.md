@@ -1,11 +1,28 @@
 # Project Overview
 
+Jasmine testing suites for a feedreader web application.
+
 1. To run the project, clone the github repository.
 2. Open *index.html* in a browser.
 3. Review the test results provided by Jasmine at the bottom of the page.
 
+## Test Details
+#### Test Suite: RSS Feeds
+* Test: "are defined" - Verifies the *allFeeds* variable has been defined and that it is not empty. 
+* Test: "each has URL" - Loops through each feed in the *allFeeds* object and verifies that each has a URL defined and that the URL is not empty
+* Test: "each has name" - Loops through each feed in the *allFeeds* object and verifies that each has a name defined and that the name is not empty
 
-# How will I complete this project?
+#### Test Suite: The menu
+* Test: "hidden by default" - Verifies the *menu* element is hidden by default
+* Test: "visible on click" - Verifies the *menu* changes visibility when the menu icon is clicked
+
+#### Test Suite: Initial Entries
+* Test: "loading at least a single entry" - Verifies that when *loadFeed()* is called and completes its work, there is at least a single *.entry* element within the *.feed* container
+
+#### Test Suite: New Feed Selection
+* Test: "loading different feed" - Verifies that a new feed is loaded by *loadFeed()* that the content actually changes
+
+## Assignment Instructions: How will I complete this project?
 
 1. Download the [required project assets](http://github.com/udacity/frontend-nanodegree-feedreader).
 2. Review the functionality of the application within your browser.
